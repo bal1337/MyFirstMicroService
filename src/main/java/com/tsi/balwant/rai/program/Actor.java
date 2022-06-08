@@ -19,13 +19,14 @@ public class Actor {
     private String last_name;
 
 
-    // @ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
-    // @JsonIgnore
-    // private Set<Film> film = newHashSet<>();
+    //@ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
+    //@JsonIgnore
+    //private Set<Film> film = newHashSet<>();
 
     public Actor(String first_name, String last_name){
         this.first_name = first_name;
         this.last_name = last_name;
+
     }
 
     //Empty Constructor
@@ -35,12 +36,8 @@ public class Actor {
     //Getters and Setters
 
     //needed to Many-to-Many mapping
-//    public Set<Film> getFilm() {
-//            return film;
-//  }
-//  public void setFilm(Set<Film> films) {
-//      this.film = films;
-//  }
+    //public Set<Film> getFilm() {return film; }
+    //public void setFilm(Set<Film> films) {this.film = films;}
 
 
     public int getActor_id() {
