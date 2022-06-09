@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
+
+//Purpose of my microservice is to recommend users films based off of their particular interests
 @CrossOrigin(origins = "*") // required for receiving a request through API
 @SpringBootApplication
 @RestController // manages GET, POST, DELETE and PUT requests
@@ -90,18 +92,20 @@ public class MyFirstMicroserviceApplication {
 		return "Actor has been deleted successfully";
 	}
 
-	//CRUD Methods for Films//
-//	@PostMapping("/newFilms")
-//	public @ResponseBody
-//	String addNewFilm(@RequestParam String title, int release_year, String rating, String description){
-//		Film addNewFilm = new Film(title, release_year, rating, description);
-//		filmRepository.save(addNewFilm);
-//		return save;
-//	}
-
-	@GetMapping("/Films")
+	//CRUD Methods for Languages
+	@GetMapping("/All_Languages")
 	public @ResponseBody
-	Iterable<Film> getAllFilms(){
+	Iterable<Language>getAllLanguages(){
+		return languageRepository.findAll();
+	}
+
+
+
+	//CRUD Methods for Films
+
+	@GetMapping("/All_Films")
+	public @ResponseBody
+	Iterable<Film>getAllFilms(){
 		return filmRepository.findAll();
 	}
 
@@ -110,6 +114,27 @@ public class MyFirstMicroserviceApplication {
 	Optional<Film> getFilmByID(@PathVariable int film_id){
 		return filmRepository.findById(film_id);
 	}
+
+
+	// Crud Methods for Categories
+	@GetMapping("/All_Categories")
+	public @ResponseBody
+	Iterable<Category>getAllCategories(){
+		return categoryRepository.findAll();
+	}
+
+
+
+	// Crud Methods for Film Categories
+	@GetMapping("/All_FilmCategories")
+	public @ResponseBody
+	Iterable<FilmCategory>getAllFilmCategories(){
+		return filmCategoryRepository.findAll();
+	}
+
+
+
+
 
 }
 
