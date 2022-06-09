@@ -23,7 +23,8 @@ public class MockitoTest {
     private MyFirstMicroserviceApplication myFirstMicroserviceApplication;
     @Mock
     private ActorRepository actorRepository;
-    @Mock
+
+
 //
     @BeforeEach
     void setUp(){
@@ -34,7 +35,7 @@ public class MockitoTest {
     @Test
     public void testAddActor(){
         Actor MockActor = new Actor("First name", "Last name");
-        String expected = "save";
+        String expected = "Save";
         String actual = myFirstMicroserviceApplication.addActor(MockActor.getFirst_name(), MockActor.getLast_name());
         ArgumentCaptor<Actor>actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture()); // ensures mock object is a mock object and acts as one
@@ -44,7 +45,7 @@ public class MockitoTest {
 
   @Test
     public void testGetAllActors(){
-        Actor testActorCast = new Actor("TestFirstName", "TestLastName", 1);
+        Actor testActorCast = new Actor("TestFirstName", "TestLastName");
         List<Actor> actorList = new ArrayList<>();
         actorList.add(testActorCast);
         when(myFirstMicroserviceApplication.getAllActors()).thenReturn(actorList);

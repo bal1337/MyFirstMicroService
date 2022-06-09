@@ -40,7 +40,7 @@ public class Actor {
     //public void setFilm(Set<Film> films) {this.film = films;}
 
 
-    public int getActor_id() {
+    public int getActorById() {
         return actor_id;
     }
 

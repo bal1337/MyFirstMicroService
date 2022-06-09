@@ -28,6 +28,9 @@ public class MyFirstMicroserviceApplication {
 	@Autowired
 	private LanguageRepository languageRepository;
 
+	@Autowired
+	private FilmCategoryRepository filmcategoryRepository;
+
 	private String save="Save";
 
 
@@ -35,13 +38,15 @@ public class MyFirstMicroserviceApplication {
 		SpringApplication.run(MyFirstMicroserviceApplication.class, args);
 	}
 
-	public MyFirstMicroserviceApplication(ActorRepository actorRepository, FilmRepository filmRepository,
-										  CategoryRepository categoryRepository,LanguageRepository languageRepository) {
-
+	public MyFirstMicroserviceApplication(ActorRepository actorRepository ) {
+//		FilmRepository filmRepository,LanguageRepository languageRepository,
+//				CategoryRepository categoryRepository, FilmCategoryRepository filmcategoryRepository
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
-		this.categoryRepository = categoryRepository;
 		this.languageRepository = languageRepository;
+		this.categoryRepository = categoryRepository;
+		this.filmcategoryRepository = filmcategoryRepository;
+
 	}
 
 	//****--ACTORS--****//
@@ -58,16 +63,9 @@ public class MyFirstMicroserviceApplication {
 	Optional<Actor> getActorByID(@PathVariable int actor_id){
 		return actorRepository.findById(actor_id);
 	}
-	//Build create actor REST API
-//	@PostMapping("/Add_Actor")
-//	public @ResponseBody
-//	String addActor(@RequestParam String first_name, @RequestParam String last_name) {
-//		Actor newActor = new Actor(first_name, last_name);
-//		actorRepository.save(newActor);
-//		return save;
-//	}
 
 	//CRUD Methods for Actors//
+	//Build create actor REST API
 	@PostMapping("/addActor")
 	public @ResponseBody
 	String addActor(@RequestParam String first_name, String last_name){
@@ -129,7 +127,7 @@ public class MyFirstMicroserviceApplication {
 	@GetMapping("/All_FilmCategories")
 	public @ResponseBody
 	Iterable<FilmCategory>getAllFilmCategories(){
-		return filmCategoryRepository.findAll();
+		return filmcategoryRepository.findAll();
 	}
 
 
