@@ -58,13 +58,6 @@ public class Film{
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public int getLength() {
         return length;
@@ -80,5 +73,13 @@ public class Film{
 
     public void setLanguage_id(int language_id) {
         this.language_id = language_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

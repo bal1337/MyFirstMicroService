@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,13 +22,13 @@ public class MyFirstMicroserviceApplication {
 	private ActorRepository actorRepository;
 
 	@Autowired
-	private FilmRepository filmRepository;
-
-	@Autowired
 	private CategoryRepository categoryRepository;
 
 	@Autowired
 	private LanguageRepository languageRepository;
+
+	@Autowired
+	private FilmRepository filmRepository;
 
 	@Autowired
 	private FilmCategoryRepository filmcategoryRepository;
@@ -38,15 +40,13 @@ public class MyFirstMicroserviceApplication {
 		SpringApplication.run(MyFirstMicroserviceApplication.class, args);
 	}
 
-	public MyFirstMicroserviceApplication(ActorRepository actorRepository ) {
-//		FilmRepository filmRepository,LanguageRepository languageRepository,
-//				CategoryRepository categoryRepository, FilmCategoryRepository filmcategoryRepository
+	public MyFirstMicroserviceApplication(ActorRepository actorRepository, FilmRepository filmRepository,LanguageRepository languageRepository,
+				CategoryRepository categoryRepository, FilmCategoryRepository filmcategoryRepository){
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
 		this.languageRepository = languageRepository;
 		this.categoryRepository = categoryRepository;
 		this.filmcategoryRepository = filmcategoryRepository;
-
 	}
 
 	//****--ACTORS--****//
@@ -97,10 +97,7 @@ public class MyFirstMicroserviceApplication {
 		return languageRepository.findAll();
 	}
 
-
-
 	//CRUD Methods for Films
-
 	@GetMapping("/All_Films")
 	public @ResponseBody
 	Iterable<Film>getAllFilms(){
@@ -113,7 +110,6 @@ public class MyFirstMicroserviceApplication {
 		return filmRepository.findById(film_id);
 	}
 
-
 	// Crud Methods for Categories
 	@GetMapping("/All_Categories")
 	public @ResponseBody
@@ -121,18 +117,12 @@ public class MyFirstMicroserviceApplication {
 		return categoryRepository.findAll();
 	}
 
-
-
 	// Crud Methods for Film Categories
 	@GetMapping("/All_FilmCategories")
 	public @ResponseBody
 	Iterable<FilmCategory>getAllFilmCategories(){
 		return filmcategoryRepository.findAll();
 	}
-
-
-
-
 
 }
 
