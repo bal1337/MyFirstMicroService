@@ -33,6 +33,9 @@ public class MyFirstMicroserviceApplication {
 	@Autowired
 	private FilmCategoryRepository filmcategoryRepository;
 
+	@Autowired
+	private FilmActorRepository filmActorRepository;
+
 	private String save="Save";
 
 
@@ -41,12 +44,14 @@ public class MyFirstMicroserviceApplication {
 	}
 
 	public MyFirstMicroserviceApplication(ActorRepository actorRepository, FilmRepository filmRepository,LanguageRepository languageRepository,
-				CategoryRepository categoryRepository, FilmCategoryRepository filmcategoryRepository){
+				CategoryRepository categoryRepository, FilmCategoryRepository filmcategoryRepository, FilmActorRepository filmActorRepository){
 		this.actorRepository = actorRepository;
 		this.filmRepository = filmRepository;
 		this.languageRepository = languageRepository;
 		this.categoryRepository = categoryRepository;
 		this.filmcategoryRepository = filmcategoryRepository;
+		this.filmActorRepository = filmActorRepository;
+
 	}
 
 	//****--ACTORS--****//
@@ -122,6 +127,17 @@ public class MyFirstMicroserviceApplication {
 	public @ResponseBody
 	Iterable<FilmCategory>getAllFilmCategories(){
 		return filmcategoryRepository.findAll();
+	}
+
+	@GetMapping("/All_Film_Actors")
+	public @ResponseBody
+	Iterable<FilmActor>getAllFilmActors(){
+		return filmActorRepository.findAll();
+	}
+
+	@GetMapping("/Film_By_Actor/{actorId}")
+	public ResponseEntity <List<FilmActor>> getFilmByActor(@PathVariable int actorId){
+		return new ResponseEntity<>(filmActorRepository.findByActorId(actorId),HttpStatus.OK);
 	}
 
 }

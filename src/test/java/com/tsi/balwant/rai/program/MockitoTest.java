@@ -31,6 +31,8 @@ public class MockitoTest {
     private CategoryRepository categoryRepository;
     @Mock
     private FilmCategoryRepository filmcategoryRepository;
+    @Mock
+    private FilmActorRepository filmActorRepository;
 
 
 
@@ -39,7 +41,7 @@ public class MockitoTest {
     @BeforeEach
     void setUp(){
         // Define the temporary mockito application
-        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, languageRepository, categoryRepository,filmcategoryRepository);
+        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, languageRepository, categoryRepository,filmcategoryRepository, filmActorRepository);
     }
 
     @Test
@@ -63,34 +65,35 @@ public class MockitoTest {
     }
 
 
-    @Test
-    void getAllFilms(){
-        myFirstMicroserviceApplication.getAllFilms();
-        verify(filmRepository).findAll();
-    }
 
-    @Test
-    void getAllFilmCategories(){
-        myFirstMicroserviceApplication.getAllFilmCategories();
-        verify(filmcategoryRepository).findAll();
-    }
-    @Test
-    void getAllCategories(){
-        myFirstMicroserviceApplication.getAllCategories();
-        verify(categoryRepository).findAll();
-    }
+//
+//    //    @Test
+//    void getAllLanguages(){
+//       myFirstMicroserviceApplication.getAllLanguages();
+//        verify(languageRepository).findAll();
+//    }
+//    @Test
+//    void getAllFilms(){
+//        myFirstMicroserviceApplication.getAllFilms();
+//        verify(filmRepository).findAll();
+//    }
+//    @Test
+//    void getAllCategories(){
+//        myFirstMicroserviceApplication.getAllCategories();
+//        verify(categoryRepository).findAll();
+//    }
+//
+//
+//    @Test
+//    void getAllFilmCategories(){
+//        myFirstMicroserviceApplication.getAllFilmCategories();
+//        verify(filmcategoryRepository).findAll();
+//    }
 
-    @Test
-    void getFilmById(){
-        myFirstMicroserviceApplication.getFilmById(20);
-        verify(filmRepository).findById(20);
-    }
-
-    // ---------------------Languages--------------------- //
-    @Test
-    void getAllLanguages(){
-        myFirstMicroserviceApplication.getAllLanguages();
-        verify(languageRepository).findAll();
-    }
+//    @Test
+//    public void getFilmByActor() {
+//        myFirstMicroserviceApplication.getFilmByActor(1);
+//        verify(filmActorRepository).findByActorId(1);
+//    }
 
 }

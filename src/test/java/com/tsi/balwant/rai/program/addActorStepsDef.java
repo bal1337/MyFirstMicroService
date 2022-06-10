@@ -37,6 +37,7 @@ public class addActorStepsDef {
 
 
 
+
     //Used for Assertions
     String Expected;
     String Actual;
@@ -50,10 +51,11 @@ public class addActorStepsDef {
         languageRepository = mock(LanguageRepository.class);
         filmRepository= mock(FilmRepository.class);
         filmCategoryRepository= mock(FilmCategoryRepository.class);
-        filmActorRepository= mock(FilmActorRepository.class);
+        filmActorRepository = mock(FilmActorRepository.class);
 
 
-            myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, languageRepository, categoryRepository, filmCategoryRepository);
+
+            myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, languageRepository, categoryRepository, filmCategoryRepository, filmActorRepository);
 
     }
 
