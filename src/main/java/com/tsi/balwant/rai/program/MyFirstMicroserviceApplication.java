@@ -164,14 +164,12 @@ public class MyFirstMicroserviceApplication {
     // Finds a list of films based on specifying a specific category name
     @GetMapping ("/film/filmByCategory/{name}")
     public List<FilmCategory> getFilmsByCategoryName(@PathVariable String name){
-        if (categoryRepository.findByName(name)!= null){
-            return filmCategoryRepository.findByCategoryId(categoryRepository.findByName(name).getCategoryId());
-        } else throw new ResourceNotFoundException("No film with the category entered could not be found");
+        return filmCategoryRepository.findByCategoryId(categoryRepository.findByName(name).getCategoryId());
     }
 
     //Returns a list of films based on the actor name search with specified first and last name
     @GetMapping ("/actor/name/{name}")
-    public List<Actor> getFilmByActorName(@PathVariable String name){
+    public List<Actor> getActorIdByName(@PathVariable String name){
         return actorRepository.findByFirstNameLikeOrLastNameLike("%" + name + "%", "%" + name + "%");	// The % are Used for the SQL query
     }
 
