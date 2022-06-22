@@ -96,7 +96,7 @@ public class MyFirstMicroserviceApplication {
         } else throw new ResourceNotFoundException("This actor could not be deleted");
     }
 
-    // Updates actor with new names
+    // Updates actor with new names based on providing an id, first and last name
 	@PutMapping ("/updateActor/{actor_id}")
     public @ResponseBody String updateActor(@PathVariable int actorId, @RequestParam String firstName, @RequestParam String lastName){
 
@@ -148,7 +148,7 @@ public class MyFirstMicroserviceApplication {
         return filmRepository.findByTitleLikeOrDescriptionLike(keyword,  keyword);
     }
     // ---------------------Film Actors---------------------//
-    // Returns a list of actor id's and their film id's
+    // Returns a list of actor ids with their respective film ids
     @GetMapping("/film/actors")
     public @ResponseBody
     Iterable<FilmActor>getAllFilmActors(){
