@@ -1,6 +1,16 @@
 package com.tsi.balwant.rai.program;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface FilmRepository extends CrudRepository<Film, Integer> {
+
+import java.util.List;
+
+@Repository
+public interface FilmRepository extends CrudRepository<Film, Integer>{
+
+    List<Film> findByTitleLikeOrDescriptionLike(String title, String description);
+    List<Film> findByLanguageId(int languageId);
+    List<Film> findByLength(int length);
+
 }

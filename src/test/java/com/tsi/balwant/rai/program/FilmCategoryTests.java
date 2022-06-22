@@ -1,4 +1,4 @@
 package com.tsi.balwant.rai.program;
 
-public class ActorTest {
+public class FilmCategoryTests {
 }

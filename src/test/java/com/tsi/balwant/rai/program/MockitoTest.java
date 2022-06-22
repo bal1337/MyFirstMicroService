@@ -1,99 +1,132 @@
 package com.tsi.balwant.rai.program;
-
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-//
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
-    // Duplicates database for testing
+    // @Mock - Makes a duplicate for which tests will be simulated
     private MyFirstMicroserviceApplication myFirstMicroserviceApplication;
+
     @Mock
     private ActorRepository actorRepository;
     @Mock
     private FilmRepository filmRepository;
     @Mock
-    private LanguageRepository languageRepository;
+    private FilmCategoryRepository filmCategoryRepository;
+    @Mock
+    private FilmActorRepository filmActorRepository;
     @Mock
     private CategoryRepository categoryRepository;
     @Mock
-    private FilmCategoryRepository filmcategoryRepository;
+    private LanguageRepository languageRepository;
+
+
     @Mock
-    private FilmActorRepository filmActorRepository;
+    Actor newActor1 = new Actor(1, "Bal", "Rai");
+    @Mock
+    Actor newActor2 = new Actor(2, "Arjun", "Rai");
+    @Mock
+    Film testFilm1 = new Film (1, "DeadPool", "Film by marvel", 150, 1);
+    @Mock
+    Film testFilm2 = new Film (2, "Happy Gilmore", "Lucky golfer", 150, 1);
+    @Mock
+    FilmCategory testFilmCategory1 = new FilmCategory (1, 1);
+    @Mock
+    FilmCategory testFilmCategory2 = new FilmCategory (2, 2);
 
 
 
+    @Mock Category testCategoryAction = new Category(1, "Action");
+    @Mock Category testCategoryComedy = new Category(2, "Comedy");
 
-    //
+    //Used for Assertions
+    String Expected;
+    String Actual;
+
+
+    // Ran before each Test, setting up mock repositories
     @BeforeEach
     void setUp(){
-        // Define the temporary mockito application
-        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, languageRepository, categoryRepository,filmcategoryRepository, filmActorRepository);
+        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, filmCategoryRepository, filmActorRepository,categoryRepository, languageRepository);
+    }
+
+    // ---------------------Actors--------------------- //
+
+    @Test
+    void getAllActors(){
+        myFirstMicroserviceApplication.getAllActors();
+        verify(actorRepository).findAll();
+
+    }
+    @Test
+    void testAddActor(){
+        Actual = myFirstMicroserviceApplication.addActor(newActor1.getFirstName(), newActor1.getLastName());
+        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class); //Allows you to capture arguments passed to a method in this case, its catching the Actor class
+        verify(actorRepository).save(actorArgumentCaptor.capture()); // Verify checks to make sure the method has run
+        actorArgumentCaptor.getValue(); // From my understanding, it would get the last value added to the actorArgumentCaptor, in this case the Actor class
+        Expected = "Actor has been successfully added";
+        Assertions.assertEquals(Expected, Actual, "Actor not saved in Database.");
+    }
+
+
+    // ---------------------Films--------------------- //
+
+
+
+    @Test
+    void getFilmByActor(){
+       myFirstMicroserviceApplication.getFilmByActor(1);
+        verify(filmActorRepository).findByActorId(1);
+    }
+    @Test
+    void getAllFilms(){
+        List<Film> filmList = new ArrayList<>();
+        filmList.add(testFilm1);
+        when(myFirstMicroserviceApplication.getAllFilms()).thenReturn(filmList);
+        Assertions.assertEquals(filmList, myFirstMicroserviceApplication.getAllFilms());
     }
 
     @Test
-    void testAddActor(){
-        Actor MockActor = new Actor("First name", "Last name");
-        String expected = "Save";
-        String actual = myFirstMicroserviceApplication.addActor(MockActor.getFirst_name(), MockActor.getLast_name());
-        ArgumentCaptor<Actor>actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        verify(actorRepository).save(actorArgumentCaptor.capture()); // ensures mock object is a mock object and acts as one
-        actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected, actual,"Actor failed to add to the mock");
+    void getAllFilmCategories(){
+        myFirstMicroserviceApplication.getAllFilmCategories();
+        verify(filmCategoryRepository).findAll();
+    }
+    @Test
+    void getAllCategories(){
+        myFirstMicroserviceApplication.getAllCategories();
+        verify(categoryRepository).findAll();
     }
 
-  @Test
-    void testGetAllActors(){
-        Actor testActorCast = new Actor("TestFirstName", "TestLastName");
-        List<Actor> actorList = new ArrayList<>();
-        actorList.add(testActorCast);
-        when(myFirstMicroserviceApplication.getAllActors()).thenReturn(actorList);
-        Assertions.assertEquals(actorList, myFirstMicroserviceApplication.getAllActors(), "Actor data was not added to the duplicate database");
+    @Test
+    public void testGetCategory (){
+
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(testCategoryAction);
+        when(myFirstMicroserviceApplication.getAllCategories()).thenReturn(categoryList);
+        Assertions.assertEquals(categoryList, myFirstMicroserviceApplication.getAllCategories(), "Category has failed");
     }
 
 
 
-//
-//    //    @Test
-//    void getAllLanguages(){
-//       myFirstMicroserviceApplication.getAllLanguages();
-//        verify(languageRepository).findAll();
-//    }
-//    @Test
-//    void getAllFilms(){
-//        myFirstMicroserviceApplication.getAllFilms();
-//        verify(filmRepository).findAll();
-//    }
-//    @Test
-//    void getAllCategories(){
-//        myFirstMicroserviceApplication.getAllCategories();
-//        verify(categoryRepository).findAll();
-//    }
-//
-//
-//    @Test
-//    void getAllFilmCategories(){
-//        myFirstMicroserviceApplication.getAllFilmCategories();
-//        verify(filmcategoryRepository).findAll();
-//    }
 
-//    @Test
-//    public void getFilmByActor() {
-//        myFirstMicroserviceApplication.getFilmByActor(1);
-//        verify(filmActorRepository).findByActorId(1);
-//    }
 
+    // ---------------------Languages--------------------- //
+    @Test
+    void getAllLanguages(){
+        myFirstMicroserviceApplication.getAllLanguages();
+        verify(languageRepository).findAll();
+    }
 }

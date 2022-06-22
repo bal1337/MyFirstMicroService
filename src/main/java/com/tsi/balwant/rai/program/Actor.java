@@ -1,66 +1,60 @@
 package com.tsi.balwant.rai.program;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name ="actor")
+@Table(name="actor")
 
 public class Actor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private int actor_id;
-
     //Attributes
-    private String first_name;
-    private String last_name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "actor_id")
+    int actorId;
+    @Column (name = "first_name")
+    String firstName;
+    @Column (name = "last_name")
+    String lastName;
 
-
-    //@ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
-    //@JsonIgnore
-    //private Set<Film> film = newHashSet<>();
-
-    public Actor(String first_name, String last_name){
-        this.first_name = first_name;
-        this.last_name = last_name;
+    //Constructors
+    public Actor(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
 
     }
 
-    //Empty Constructor
-    public Actor(){
+    public Actor(int actorId, String firstName, String lastName){
+        this.actorId = actorId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    public Actor() {}
+
+    //Methods
+
+
+    public int getActorId() {
+        return actorId;
     }
 
-    //Getters and Setters
-
-    //needed to Many-to-Many mapping
-    //public Set<Film> getFilm() {return film; }
-    //public void setFilm(Set<Film> films) {this.film = films;}
-
-
-    public int getActorById() {
-        return actor_id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setActor_id(int actor_id) {
-        this.actor_id = actor_id;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

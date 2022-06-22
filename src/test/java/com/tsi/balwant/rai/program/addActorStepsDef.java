@@ -48,32 +48,32 @@ public class addActorStepsDef {
         // sets up the mock data
         actorRepository= mock(ActorRepository.class);
         categoryRepository= mock(CategoryRepository.class);
-        languageRepository = mock(LanguageRepository.class);
         filmRepository= mock(FilmRepository.class);
         filmCategoryRepository= mock(FilmCategoryRepository.class);
         filmActorRepository = mock(FilmActorRepository.class);
+        languageRepository = mock(LanguageRepository.class);
 
 
 
-            myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, languageRepository, categoryRepository, filmCategoryRepository, filmActorRepository);
+        myFirstMicroserviceApplication = new MyFirstMicroserviceApplication(actorRepository, filmRepository, filmCategoryRepository,
+                filmActorRepository, categoryRepository, languageRepository);
 
     }
 
-    @Given("I have Actor information")
-    public void i_have_actor_information() {
+    @Given("I have the actor information")
+    public void i_have_the_actor_information() {
         setup();
     }
 
-    @When("The actor information is inputted")
-    public void the_actor_information_is_inputted() {
-        Actual = myFirstMicroserviceApplication.addActor(mockActor.getFirst_name(), mockActor.getLast_name());
+    @When("I input the data into the database for adding an actor")
+    public void i_input_the_data_into_the_database_for_adding_an_actor() {
+        Actual = myFirstMicroserviceApplication.addActor(mockActor.getFirstName(), mockActor.getLastName());
     }
 
-    @Then("I get a return string confirming the success")
-    public void i_get_a_return_string_confirming_the_success() {
-        Expected = "Actor has been added.";
+    @Then("I get the success return string for adding an actor")
+    public void i_get_the_success_return_string_for_adding_an_actor() {
+        Expected = "Actor has been successfully added";
         Assertions.assertEquals(Expected, Actual, "Actor has not been added.");
     }
 
 }
-
