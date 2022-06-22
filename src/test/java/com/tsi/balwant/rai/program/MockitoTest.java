@@ -34,23 +34,23 @@ public class MockitoTest {
     private LanguageRepository languageRepository;
 
 
-    @Mock
+
     Actor newActor1 = new Actor(1, "Bal", "Rai");
-    @Mock
+
     Actor newActor2 = new Actor(2, "Arjun", "Rai");
-    @Mock
+
     Film testFilm1 = new Film (1, "DeadPool", "Film by marvel", 150, 1);
-    @Mock
+
     Film testFilm2 = new Film (2, "Happy Gilmore", "Lucky golfer", 150, 1);
-    @Mock
+
     FilmCategory testFilmCategory1 = new FilmCategory (1, 1);
-    @Mock
+
     FilmCategory testFilmCategory2 = new FilmCategory (2, 2);
 
 
 
-    @Mock Category testCategoryAction = new Category(1, "Action");
-    @Mock Category testCategoryComedy = new Category(2, "Comedy");
+     Category testCategoryAction = new Category(1, "Action");
+     Category testCategoryComedy = new Category(2, "Comedy");
 
     //Used for Assertions
     String Expected;
@@ -117,6 +117,13 @@ public class MockitoTest {
         categoryList.add(testCategoryAction);
         when(myFirstMicroserviceApplication.getAllCategories()).thenReturn(categoryList);
         Assertions.assertEquals(categoryList, myFirstMicroserviceApplication.getAllCategories(), "Category has failed");
+    }
+
+    @Test
+    public void testKeyWord (){
+        when(filmRepository.findByTitleLikeOrDescriptionLike("%DeadPool%", "%DeadPool%")).thenReturn(List.of(testFilm1));
+        List<Film>testFilm=myFirstMicroserviceApplication.getFilmByKeyword("DeadPool");
+        Assertions.assertEquals(testFilm1,testFilm.get(0));
     }
 
 
