@@ -3,26 +3,24 @@ package com.tsi.balwant.rai.program;
 import javax.persistence.*;
 
 @Entity
-@Table(name="language")
-
+@Table(name = "language")
 public class Language {
+
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Attributes
-    @Column (name = "language_id")
-    int languageId;
+    private int languageId;
     String name;
-    // Constructor
 
-    public Language(int languageId, String name) {
-        this.languageId = languageId;
+    //Constructors
+    public Language(String name) {
         this.name = name;
     }
 
-    public Language(){}
+    public Language() {
+    }
 
-    // Getters & Setters
-
+    //Methods
     public int getLanguageId() {
         return languageId;
     }

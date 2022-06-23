@@ -10,7 +10,4 @@ import java.util.List;
 public interface FilmRepository extends CrudRepository<Film, Integer>{
 
     List<Film> findByTitleLikeOrDescriptionLike(String title, String description);
-    List<Film> findByLanguageId(int languageId);
-    List<Film> findByLength(int length);
-
 }
