@@ -39,5 +39,4 @@ class FilmCategoryTests {
         Assertions.assertEquals(Expected, Actual , "Film ID set incorrectly");
     }
 
-
 }

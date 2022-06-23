@@ -1,10 +1,9 @@
 package com.tsi.balwant.rai.program;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-//import org.springframework.data.annotation.Id;
+
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name="category")
@@ -16,9 +15,7 @@ public class Category {
     private int categoryId;
     String name;
 
-    @ManyToMany (mappedBy = "category", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Film> films = new HashSet<>();
+
 
     //Constructors
     public Category(int categoryId, String name){
@@ -40,10 +37,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    public Set<Film> getFilms() {
-        return films;
-    }
-    public void setFilms(Set<Film> films) {
-        this.films = films;
-    }
+
 }
